@@ -2,67 +2,63 @@
 import './App.css'; */
 
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import BasicTable from "./components/BasicTable";
+
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/home/home";
+import Description from "./pages/description/description";
 
 function App() {
-
-  const [pokemon, setPokemon] = useState([]);
-  const [selectedPokemon, setSelectedPokemon] = useState(null); 
-
-  const url = 'http://pokeapi.co/api/v2/pokemon/'
-      const fetch = (url)=>{
-        axios.get(url)
-        .then((res) => {
-              return res.data.results
-        })
-        .then((results) => {
-          return Promise.all( 
-            results.map((res) => 
-            axios.get(res.url))
-            )
-        })
-        .then((results) => {
-          setPokemon(results.map((res) =>res.data)
-          )
-        })
-      }
-  useEffect(() => {
-    fetch(url)
-  /*   const getApi = async () => {
-      const response = await fetch("https://pokeapi.co/api/v2/pokemon");
-      const data = await response.json();
-      setListaPokemon(data.results);
-      console.log(data.results)
-    } */
-
-   /*  fetch("http://pokeapi.co/api/v2/pokemon")
-      .then (response => response.json())
-      .then (data => setPokemon(data.results))
-      .then (fetch(results).then (i => console.log(i))) */
-
-      
-
-      // .then (data => console.log(data.results.url[0]))
-      // .then ((results) => Promise.all(results.map((item )=> fetch(item.url))))
-
-  }, [url]);
-
   return (
-    
-    <div>
-      <h1>Listado de pokemones</h1>
-      <ul>
-        {pokemon.map((poke) => (
-          <li key={poke.name}>
-            <img src={poke.sprites.front_default} alt={poke.name} />
-            <h2>{poke.id} - {poke.name}</h2>
-            <a href={poke.url}>Learn more...</a>
-          </li>
-          )       
-        )}
-      </ul>
-    </div>
-  )
+    <Routes>
+      <Route path="/" element={<Home />} exact />
+      <Route path="/description" element={<Description />} exact />
+    </Routes>
+  );
 }
 
 export default App;
+
+
+//   <div>
+
+//     {/* <h1>Listado de pokemones</h1>
+//     <ul>
+//       {pokemon.map((poke) => (
+//         <li key={poke.name}>
+//           <img src={poke.sprites.front_default} alt={poke.name} />
+//           <h2>{poke.id} - {poke.name}</h2>
+//           <a href={poke.url}>Learn more...</a>
+//         </li>
+//         )
+//       )}
+//     </ul> */}
+
+//     {/* <h1>Tabla de Pokemones</h1>
+//     <table>
+//      <thead>
+//        <tr>
+//          <th>Número de Pokedex</th>
+//          <th>Nombre</th>
+//          <th>Tipo de Pokemon</th>
+//          <th>Descripción</th>
+//        </tr>
+//      </thead>
+//      <tbody>
+//        {
+//        pokemon.map( (poke) =>
+//       ( <tr key={poke.name}>
+//            <td className='table-data'>{poke.id}</td>
+//            <td className='table-data'>{poke.name}</td>
+//            <td className='table-data'>{poke.types && poke.types.map(type => type.type.name).join(', ')}</td>
+//            <td className='table-data'>{poke.url}</td>
+//        </tr>)
+//        )
+//      }
+//      </tbody>
+//     </table> */}
+
+//       <BasicTable pokemon={pokemon}/>
+
+//   </div>
+// )

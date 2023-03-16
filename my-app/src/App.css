@@ -1,3 +1,32 @@
+:root {
+  --greenish: rgb(83, 146, 131);
+  --greyish: rgb(238, 249, 238);
+  --bluish: rgb(47, 134, 139);
+}
+
+.nav-container {
+  background-color: rgb(52, 105, 165);
+  color: rgb(247, 204, 1);
+  padding: 0.1em;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.2);;
+}
+
+.table-container {
+  justify-content: center;
+  align-items: center;
+  margin: 2em;
+}
+
+#table {
+  background-color: rgb(247, 250, 247);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+/*----------------------------------------------------------------*/
+
 .App {
   text-align: center;
 }
