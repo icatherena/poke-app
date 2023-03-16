@@ -12,7 +12,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} exact />
-      <Route path="/description" element={<Description />} exact />
+      <Route path="home/description/:id" element={<Description />} exact />
     </Routes>
   );
 }

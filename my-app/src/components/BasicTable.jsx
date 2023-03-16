@@ -18,8 +18,11 @@ const BasicTable = ({pokemon}) => {
     },
     [pokemon]) 
 
+    useEffect(() => {
+      console.log('update list', listPokemon);
+    },
+    [listPokemon]) 
 
-  listPokemon.map((e) => console.log(e.name))
   
   return (
     <Grid container>
@@ -42,7 +45,7 @@ const BasicTable = ({pokemon}) => {
                   {poke.name}
                 </TableCell>
                 <TableCell component="th" scope="row" align="center">
-                <Link to={poke.url}><b>Ir a la descripción de <i>{poke.name}</i></b></Link>
+              <Link to={`home/description/${poke.id}`}><b>Ir a la descripción de <i>{poke.name}</i></b></Link>
                 </TableCell>
               </TableRow>
             ))}
