@@ -7,7 +7,7 @@
 .nav-container {
   background-color: rgb(52, 105, 165);
   color: rgb(247, 204, 1);
-  padding: 0.1em;
+  padding: .5em;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -36,6 +36,36 @@
   justify-content: center;
   align-items: center;
 }
+
+#card-mui {
+  width: 26em;
+  border-radius: 1em 1em 0 0;
+  background-color: var(--greyish);
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+#card-media {
+  height: 24em;
+  padding: 1em 0.5em;
+  background-color: var(--greyish);
+}
+
+#card-media img {
+  height: fit-content;
+}
+
+#card-content {
+  padding: 2em 4em;
+  border-radius: 1.5em 1.5em 0 0;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  background: linear-gradient(rgb(54, 140, 144) 60%, rgb(46, 119, 142));
+  color: var(--greyish);
+  justify-content: center;
+  text-align: center;
+  
+}
+
+
 
 /*----------------------------------------------------------------*/
 

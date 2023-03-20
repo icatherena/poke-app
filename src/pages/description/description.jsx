@@ -6,38 +6,45 @@ import NavBar from '../../components/NavBar';
 import { useParams } from 'react-router-dom';
 
 const Description = () => {
-    /* const routeParams = useParams();
-    console.log(routeParams); */
+    const {id} = useParams()
 
-    const {id} = useParams();
-    console.log(id);
-
-    const [pokemon, setPokemon] = useState([]); 
-
+    const [pokemon, setPokemon] = useState([])
+    const [pokeName, setPokeName] = useState('')
+    const [pokeImage, setPokeImage] = useState('')
+    const [pokeAbilities, setPokeAbilities] = useState([])
+    const [pokeTypes, setPokeTypes] = useState([])
+    const [pokeMoves, setPokeMoves] = useState([])
 
    useEffect(() => {
-     
         axios.get(baseUrl+`${id}`)
             .then((res) => {
-                console.log('Response:', res);
-                return setPokemon(res.data)
+                setPokemon(res.data)
+                setPokeName(res.data.name)
+                setPokeImage(res.data.sprites.other.home.front_default)
+                setPokeAbilities(res.data.abilities)
+                setPokeTypes(res.data.types)
+                setPokeMoves(res.data.moves)
             })
+    }, [id]);
 
-    }, []);
-    
+    console.log(pokemon)
     return (
         <div>
             <div className='nav-container' sx={12}>
                 <NavBar/>
             </div>
-            <div className='card-container' >
-               {/* <ImgMediaCard key={pokemon.id} name={pokemon.name} description={pokemon.flavor_text_entries} /> */}
+            <div className='card-container' xs={12} sm={10} md={6} >
                 <ImgMediaCard 
-                props={pokemon} 
-                // image={pokemon.sprites.back_default}
-                name={pokemon.name} 
-                bexp={pokemon.base_experience}
-                image={pokemon.sprites.other.home.front_default}
+                pokemon={pokemon} 
+                name = {pokeName}
+                numPokedex = {pokemon.id}
+                abilities = {pokeAbilities}
+                moves = {pokeMoves}
+                types = {pokeTypes}
+                weight = {pokemon.weight}
+                height = {pokemon.height}
+                bexp = {pokemon.base_experience}
+                image={pokeImage}
                 />
             </div>
         </div>

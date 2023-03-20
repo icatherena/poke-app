@@ -19,7 +19,7 @@ const BasicTable = ({pokemon}) => {
     },
     [pokemon]) 
 
-    useEffect(() => {
+  useEffect(() => {
       console.log('update list', listPokemon);
     },
     [listPokemon]) 

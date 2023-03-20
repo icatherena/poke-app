@@ -14,32 +14,62 @@ const ImgMediaCard = (props) => {
   const [pokemon, setPokemon] = useState()
 
   useEffect(() => {
-    setPokemon(pokemon);
+    setPokemon(props.pokemon);
   },
-  [pokemon]) 
+  [props.pokemon]) 
 
   return (
     <Grid container >
       <Grid item xx={12} sm={12} md={12} id='card'>
-        <Card sx={{ minWidth: '20em'}} sm={{ minWidth: '40em'}} md={{ minWidth: '60em'}}>
+        <Card sx={{ minWidth: '20em'}} sm={{ minWidth: '40em'}} md={{ minWidth: '60em'}} id='card-mui'>
           <CardMedia
             component="img"
             alt={props.name}
-            height="auto"
             image={props.image}
+            id='card-media'
           />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+          <CardContent id='card-content'>
+            
+            <Typography gutterBottom variant="h4" component="div">
               <b>{props.name}</b>
+              {/* [0].toUpperCase() + props.name.slice(1) */}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
-             {props.bexp} 
+
+            <Typography variant="body1" component="div">
+              Ocupa la posición #{props.numPokedex} en la pokedex
             </Typography>
+
+            <Typography variant="body1">
+              Se trata de un pokemon del tipo {props.types.map((type) => type.type.name).join('/')} 
+            </Typography>
+            
+            <Typography variant="body1">
+              Entre sus habilidades cuenta con {props.abilities.map((ability) => ability.ability.name).join(', ')} 
+            </Typography>
+
+            <Typography variant="body1">
+              Sus movimientos son {props.moves.map((move) => move.move.name).join(', ')} 
+            </Typography>
+            
+            <Typography variant="body1">
+              Su altura promedio es de {props.weight} cm
+            </Typography>
+            
+            <Typography variant="body1">
+              En cuanto a su peso, alcanza los {props.height} kg de media
+            </Typography>
+            
+            <Typography variant="body1">
+              Su experiencia base es de {props.bexp} 
+            </Typography>
+
           </CardContent>
-            {/* <CardActions>
+          
+          {/* <CardActions>
               <Button size="small">Share</Button>
               <Button size="small">Learn More</Button>
             </CardActions> */}
+
         </Card>
       </Grid>
     </Grid>

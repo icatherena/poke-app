@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { Grid } from '@mui/material';
 
 const NavBar = () => {
+    const logoUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/2560px-International_Pok%C3%A9mon_logo.svg.png'
     return (
         <Grid container>
             <Grid item xs={12}>
                 <nav>
-                    {/* <image src='../assets/pokedex.png' alt='pokeLogo'/>  */}
-                    <h1>Pokedex</h1>
+                    <img src={logoUrl} alt='pokeLogo' height='40px'/> 
                 </nav>
             </Grid>
         </Grid>
