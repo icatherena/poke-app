@@ -24,7 +24,19 @@ const BasicTable = ({pokemon}) => {
     },
     [listPokemon]) 
 
-  
+  // function spliceUrl (url) {
+  //   /* const countUrl = (url.count())
+  //   url.splice((countUrl)-1) */
+  //   url.split('/').slice(6)
+  //   return (
+  //     url[34]
+  //   )
+  // }
+
+    function spliceUrl (url) {
+      return parseInt(url.split("/")[6])
+    }
+
   return (
     <Grid container>
       <Grid item xs={12} id='table-container'>
@@ -46,7 +58,7 @@ const BasicTable = ({pokemon}) => {
                   {poke.name}
                 </TableCell>
                 <TableCell component="th" scope="row" align="center">
-                  <Link to={`home/description/${poke.id}`}>{/* <b>Ir a la descripción de <i>{poke.name}</i></b> */}
+                  <Link to={`home/description/${spliceUrl(poke.url)}/`}>{/* <b>Ir a la descripción de <i>{poke.name}</i></b> */}
                     <OpenInNewIcon fontSize="small"/>
                   </Link>
                 </TableCell>
