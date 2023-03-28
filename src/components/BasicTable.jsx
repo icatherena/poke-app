@@ -24,49 +24,70 @@ const BasicTable = ({pokemon}) => {
     },
     [listPokemon]) 
 
-  // function spliceUrl (url) {
-  //   /* const countUrl = (url.count())
-  //   url.splice((countUrl)-1) */
-  //   url.split('/').slice(6)
-  //   return (
-  //     url[34]
-  //   )
-  // }
-
-    function spliceUrl (url) {
-      return parseInt(url.split("/")[6])
-    }
+  function spliceUrl (url) {
+    return parseInt(url.split("/")[6])
+  }
 
   return (
-    <Grid container>
-      <Grid item xs={12} id='table-container'>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="center"><b>Nombre del Pokemón</b></TableCell>
-              <TableCell align="center"><b>Descripción</b></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {listPokemon.map((poke) => (
-              <TableRow
-                key={poke.name}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component="th" scope="row" align="center">
-                  {poke.name}
-                </TableCell>
-                <TableCell component="th" scope="row" align="center">
-                  <Link to={`home/description/${spliceUrl(poke.url)}/`}>{/* <b>Ir a la descripción de <i>{poke.name}</i></b> */}
-                    <OpenInNewIcon fontSize="small"/>
-                  </Link>
-                </TableCell>
+    <Grid container
+      p = '2em'
+      sx = {{
+        justifyContent: 'center',        
+      }}
+    >
+      <Grid item xs={12}>
+        <TableContainer component={Paper}
+            sx = {{
+              borderRadius: '.5em'
+            }}
+        >
+          <Table 
+            sx = {{ 
+              minWidth: 500,
+            }} 
+            aria-label="simple table"
+          >
+            <TableHead
+              sx = {{
+                color: 'rgb(83, 146, 131)',
+              }}
+            >
+              <TableRow>
+                <TableCell align="center"><b>Nombre del Pokemón</b></TableCell>
+                <TableCell align="center"><b>Descripción</b></TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {listPokemon.map((poke) => (
+                <TableRow
+                  key = {poke.name}
+                  sx = {{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row" align="center">
+                    {poke.name}
+                  </TableCell>
+                  <TableCell component="th" scope="row" align="center">
+                    <Link to={`/description/${spliceUrl(poke.url)}/`} >
+                      <OpenInNewIcon fontSize="small"
+                        sx = {{
+                          color: '#539283',
+                          '&:hover': {
+                            color: '#3a665b',
+                            weight: 'bold'
+                          },
+                          '&:visited': { /* por revisar */
+                            color: '#2E778E',
+                            weight: 'bold'
+                          }
+                        }}
+                      />
+                    </Link>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>           
+        </TableContainer>
       </Grid>
     </Grid>
   )}

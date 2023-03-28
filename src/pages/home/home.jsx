@@ -27,18 +27,19 @@ const Home = () => {
   console.log("pokemon", pokemon);
 
   return (
-    <div>
-      <div className="nav-container" sx={12}>
+    <>
+      <Grid sx={12}>
         <NavBar />
-      </div>
-      <div className="table-container">
-        <Grid container spacing={1} justifyContent="center">
-          <Grid item xs={12} sm={10} md={6}>
-            <BasicTable pokemon={pokemon} />
-          </Grid>
+      </Grid> 
+      <Grid container 
+        spacing = {1} 
+        justifyContent = "center"
+      >
+        <Grid item xs={12} sm={10} md={6}>
+          <BasicTable pokemon={pokemon} />
         </Grid>
-      </div>
-    </div>
+      </Grid>
+    </>
   );
 };
 
