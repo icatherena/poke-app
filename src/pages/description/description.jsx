@@ -17,8 +17,8 @@ const Description = () => {
 
     const [evolutionChainUrl, setEvolutionChainUrl] = useState([])
     const [initialForm, setInitialForm] = useState()
-    const [midForm, setMidForm] = useState()
-    const [finalForm, setFinalForm] = useState()
+    const [midForm, setMidForm] = useState([])
+    const [finalForm, setFinalForm] = useState([])
 
     useEffect(() => {
         getPokemonById(id)
@@ -37,14 +37,12 @@ const Description = () => {
                     
                     getEvolutionChainById(parseInt(chainId))
                     .then((res) => {
-                        /* setInitialForm(res.data.chain.species.name)
-                        console.log(res.data.chain.evolves_to[0].species.name)
-                        setMidForm(res.data.chain.evolves_to[0].species.name)
-                        console.log(res.data.chain.evolves_to[0].evolves_to[0].species.name)
-                        setFinalForm(res.data.chain.evolves_to[0].evolves_to[0].species.name) */
                         setInitialForm(res.data.chain.species.name)
+                        /* console.log(res.data.chain.species.name) */
                         setMidForm(res.data.chain.evolves_to?.map((item) => item.species.name))
+                        /* console.log(res.data.chain.evolves_to?.map((item) => item.species.name)) */
                         setFinalForm(res.data.chain.evolves_to?.map((item) => item.evolves_to?.map((item) => item.species.name)))
+                        /* console.log(res.data.chain.evolves_to?.map((item) => item.evolves_to?.map((item) => item.species.name))) */
                     })
                 
                 })

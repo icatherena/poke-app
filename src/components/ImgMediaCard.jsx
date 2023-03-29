@@ -17,47 +17,73 @@ const ImgMediaCard = (props) => {
   },
   [props.pokemon]) 
 
-  function pasarAMayus(props) {
+  const pasarAMayus = (props) => {
     return (
       props.name.charAt(0).toUpperCase() + props.name.slice(1)
     )
   }
 
-  // const listaEvoluciones = []
-  // /* const listaMidEvoluciones = [] */
-  
-  // function evaluarEvoluciones(props) {
+  // const [listaEvoluciones, setListaEvoluciones] = useState([])
+  // const listaMid = []
+
+  // const evaluarEvoluciones = (props) => {
   //   listaEvoluciones.push(props.initialForm)
-
-  //   console.log(props.midForm)
   //   if (props.midForm) {
-  //     listaEvoluciones.push(props.midForm.map((item) => item.species.name))
-  //     /* listaMidEvoluciones.push(props.midForm.map((item) => item.species.name))
-  //     listaEvoluciones = [].concat(...listaMidEvoluciones) */
-  //     /* listaMidEvoluciones = props.midForm.map((item) => item.species.name);
-  //     listaEvoluciones = [].concat(...listaMidEvoluciones); */
-  //   } 
-    
-  //   if (props.finalForm) {
-  //     listaEvoluciones.push(props.finalForm.species.name)
+  //     if (props.midForm.length > 1) {
+  //       listaMid.push(props.midForm);
+  //       setListaEvoluciones([...listaEvoluciones, listaMid])
+  //     } else {
+  //       listaEvoluciones.push(props.midForm)
+  //     }
   //   }
-    
-  // console.log(listaEvoluciones)
-  //   /* return (listaEvoluciones).join(', ') */
-  // }
+  //   if (props.finalForm && props.finalForm !== undefined) { 
+  //     listaEvoluciones.push(props.finalForm)
+  //   }
 
-  const listaEvoluciones = []
+  // }
+  
+  /* console.log(listaEvoluciones); */
+
+  const [listaEvoluciones, setListaEvoluciones] = useState([])
+ 
+  useEffect(() => {
+    evaluarEvoluciones(props)
+  }, [props])
 
   const evaluarEvoluciones = (props) => {
-    listaEvoluciones.push(props.initialForm)
-    if (props.midForm) {
-      listaEvoluciones.push(props.midForm)
+    setListaEvoluciones([props.initialForm])
+    if (props.midForm && props.midForm.length > 0) {
+      let midList = []
+      if (Array.isArray(props.midForm)) {
+        midList = props.midForm.map((item) => item)
+        setListaEvoluciones(prevList => prevList.concat(midList))
+      } else {
+        setListaEvoluciones(prevList => prevList.concat(props.midForm))
+      }
     }
-    if (props.finalForm) { 
-      listaEvoluciones.push(props.finalForm)
+    if (props.finalForm && props.midForm.length > 0) {
+      /* let finalList = [] */
+      if (props.finalForm !== null && props.finalForm !== undefined) {
+        if (Array.isArray(props.finalForm)) {
+        /* finalList = props.finalForm.map((item) => item)
+        setListaEvoluciones(prevList => prevList.concat(finalList))
+      } else {
+        setListaEvoluciones(prevList => prevList.concat(props.finalForm)) */
+          for (let i = 0; i < props.finalForm.length; i++) {
+            if (props.finalForm[i] !== null) {
+              setListaEvoluciones(prevList => prevList.concat(props.finalForm[i]))
+            }
+          }
+        } else {
+          setListaEvoluciones(prevList => prevList.concat(props.finalForm))
+          }
+      }
     }
-
   }
+
+  useEffect(() => {
+    console.log("listaEvoluciones actualizada:", listaEvoluciones)
+  }, [listaEvoluciones])
 
   const theme = createTheme({
     palette: {
@@ -135,8 +161,10 @@ const ImgMediaCard = (props) => {
 
               <Divider variant="body1"><b>CADENA EVOLUTIVA</b></Divider>
               <Typography variant="body1">
+                
+                {listaEvoluciones.join(', ')}
                 {/* {props.initialForm} → {props.midForm} → {props.finalForm} */}
-                { 
+                {/* { 
                 <ul
                   style = {{
                     listStyleType: 'none', 
@@ -177,27 +205,17 @@ const ImgMediaCard = (props) => {
                             color: '#a6aea6',
                             weight: 'bold'
                           },
-                          '&:visited': { /* por revisar */
+                          '&:visited': 
                             color: '#747974',
                             weight: 'bold'
                           }
                         }}
                       />                       
                     </Link>
-                    {Array.isArray(item) && (
-                      <ul>
-                        {item.map((subItem) => (
-                          <li key={subItem}>
-                            <Link to={`/description/${subItem}/`}>
-                              {subItem}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
+                   
                   </li> )}
                 </ul>  
-                }
+                } */}
                 
               </Typography><br/> 
 
