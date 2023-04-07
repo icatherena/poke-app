@@ -16,7 +16,9 @@ const NavBar = () => {
                     boxShadow: '2px 2px 5px 1px rgba(0, 0, 0, 0.2)'
                 }}>
                 <nav >
-                    <img src={logoUrl} alt='pokeLogo' height='40px'/> 
+                    <Link to={`/`}>
+                        <img src={logoUrl} alt='pokeLogo' height='40px' /> 
+                    </Link>
                 </nav>
             </Grid>
         </Grid>

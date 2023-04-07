@@ -2,8 +2,8 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Card, CardContent, CardMedia, Grid, Divider, Typography} from '@mui/material';
-import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+/* import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'; */
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from 'react-router-dom';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
@@ -74,7 +74,6 @@ const ImgMediaCard = (props) => {
   }
 
   useEffect(() => {
-    console.log("listaEvoluciones actualizada:", listaEvoluciones)
   }, [listaEvoluciones])
 
   const pasarAMayus = (props) => {
@@ -94,11 +93,11 @@ const ImgMediaCard = (props) => {
   return (
     <Grid container 
       sx = {{
-        padding: '2em'
+        padding: '2em',
       }}
     >
       <Grid item xs={12} sm={12} md={12} 
-        sx={{
+        sx = {{
           display: 'flex',
           justifyContent: 'center',
         }}
@@ -109,7 +108,7 @@ const ImgMediaCard = (props) => {
             width: '26em',
             backgroundColor: 'rgb(238, 249, 238)',
             borderRadius: '1em 1em 0 0',
-            boxShadow: 3,
+            boxShadow: 3
           }}
         >
           <CardMedia
@@ -158,9 +157,7 @@ const ImgMediaCard = (props) => {
               </Typography><br/>
 
               <Divider variant="body1"><b>CADENA EVOLUTIVA</b></Divider>
-              <Typography variant="body1">
-                {/* {props.initialForm} → {props.midForm} → {props.finalForm} */}
-                
+              <Typography variant="body1">             
                 <ul
                   style = {{
                     listStyleType: 'none', 
@@ -207,10 +204,8 @@ const ImgMediaCard = (props) => {
                         }}
                       />                       
                     </Link>
-                   
                   </li> )} 
-                </ul>
-                
+                </ul>                
               </Typography><br/> 
 
               <Divider variant="body1"><b>HABILIDADES</b></Divider>
@@ -218,18 +213,17 @@ const ImgMediaCard = (props) => {
                 {props.abilities.map((ability) => ability.ability.name).join(' - ')} 
               </Typography><br/>
 
-              {/* <Divider variant="body1"><b>MOVIMIENTOS</b></Divider>
+              <Divider variant="body1"><b>MOVIMIENTOS</b></Divider>
               <Typography variant="body1">
-                {props.moves.map((move) => move.move.name).join(', ')} 
+                {props.moves.slice(0, 5).map((move) => move.move.name).join(', ')} 
               </Typography><br/> 
-              */}
 
-              <Accordion 
+{/*               <Accordion 
                 elevation = {0}
                   sx = {{ 
                     background:"none", 
                     boxShadow: 'none',
-                    '&:before': { /* Remueve línea por encima del acordeón */
+                    '&:before': { 
                       display: 'none',
                     }
                   }}
@@ -256,10 +250,10 @@ const ImgMediaCard = (props) => {
                   </AccordionSummary>
                   <AccordionDetails>
                     <Typography sx = {{ color:"rgb(238, 249, 238)"}}>
-                      {props.moves.map((move) => move.move.name).join(', ')} 
+                      {props.moves.map((move) => move.move.name).join(', ')}
                     </Typography>
                   </AccordionDetails>
-              </Accordion><br/> 
+              </Accordion><br/> */} 
               
               <Divider variant="body1"><b>ALTURA</b></Divider>
               <Typography variant="body1">

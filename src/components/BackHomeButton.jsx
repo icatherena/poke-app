@@ -1,4 +1,4 @@
-import React, { useEffect, useState/* , useRef  */} from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import HomeIcon from '@mui/icons-material/Home';
 import { Fab } from "@mui/material";
@@ -6,14 +6,14 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import styled, { css } from 'styled-components';
 
 const BackHomeButton = () => {
-    /* const controls = useRef(); */
+    const controls = useRef();
     const [fixedPosition, setFixedPosition] = useState(true);
 
     useEffect(() => {
-        /* const initialTop = controls.current.getBoundingClientRect().top;
-        console.log({initialTop}) */
+        const initialTop = controls.current.getBoundingClientRect().top;
+        console.log({initialTop})
         const handleScroll = () => {
-            /* setFixedPosition(window.scrollY > initialTop) */
+            setFixedPosition(window.scrollY > initialTop)
         }
         window.addEventListener('scroll', handleScroll)
         return () => {
@@ -23,7 +23,7 @@ const BackHomeButton = () => {
     }, [])
 
     return (
-        <Container fixed={fixedPosition} /* ref={controls} */>
+        <Container fixed={fixedPosition} ref={controls}>
             <Link to={`/`}>
                 <ThemeProvider theme={theme}>
                     <Fab size="large" aria-label="Inicio" color="secondary">
@@ -36,6 +36,10 @@ const BackHomeButton = () => {
 }
 
 const Container = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 6em 2em;
     ${props => props.fixed && css`
         position: fixed;
         bottom: 0;

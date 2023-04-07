@@ -1,41 +1,28 @@
-import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import "../../App.css";
 import BasicTable from "../../components/BasicTable";
 import NavBar from "../../components/NavBar";
-import "../../App.css";
 import { getPokemons } from "../../api/apis";
+import { Grid } from "@mui/material";
 
 const Home = () => {
   const [pokemon, setPokemon] = useState([]);
 
   useEffect(() => {
-    getPokemons().then((pokemon) => setPokemon(pokemon.data.results));
-
-    // axios.get(baseUrl)
-    //     .then((results) => {
-    //         return Promise.all(
-    //             results.map((res) =>
-    //             axios.get(res.url))
-    //         )
-    //     })
-    //     .then((results) => {
-    //         setPokemon(results.map((res) =>res.data)
-    //         )
-    //     })
+    getPokemons()
+      .then((pokemon) => setPokemon(pokemon.data.results));
   }, []);
-
-  console.log("pokemon", pokemon);
 
   return (
     <>
-      <Grid sx={12}>
+      <Grid>
         <NavBar />
       </Grid> 
       <Grid container 
         spacing = {1} 
         justifyContent = "center"
       >
-        <Grid item xs={12} sm={10} md={6}>
+        <Grid>
           <BasicTable pokemon={pokemon} />
         </Grid>
       </Grid>
