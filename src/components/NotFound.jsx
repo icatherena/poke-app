@@ -9,7 +9,7 @@ const NotFound = () => {
     return (
         <Grid container xs = {12}
             sx = {{
-                height: '100vh',
+                height: '80vh',
                 display: 'flex',
                 justifyContent: 'center',
             }}
@@ -27,7 +27,7 @@ const NotFound = () => {
                 />
                 <ListItem 
                     sx = {{
-                        backgroundColor: 'rgb(238, 249, 238)',
+                        border: '1px solid rgb(39,114,185)',
                         borderRadius: '.5em',
                     }}
                 >
@@ -37,7 +37,7 @@ const NotFound = () => {
                             marginLeft: '.5em'
                         }}
                     >
-                        ERROR 404: Not Found
+                        No se ha encontrado dicho pokemon
                     </ListItemText>
                 </ListItem>
             </Grid>

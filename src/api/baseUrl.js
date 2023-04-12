@@ -1,5 +1,3 @@
-// export const baseUrl = 'http://pokeapi.co/api/v2/pokemon/'
-
 import axios from "axios";
 
 const BASEURL = axios.create({

@@ -36,7 +36,7 @@ const Description = () => {
       .then((res) => {
         setPokemon(res.data);
         setPokeName(res.data.name);
-        setPokeImage(res.data.sprites.other.home.front_default);
+        setPokeImage(res.data.sprites.other.dream_world.front_default);
         setPokeAbilities(res.data.abilities);
         setPokeTypes(res.data.types);
         setPokeMoves(res.data.moves);
@@ -85,10 +85,23 @@ const Description = () => {
       </Grid>
     ) : (pokemon ? (
       <Grid container>
-        <Grid item xs={12}>
+        <Grid item xs={12}
+          sx = {{
+            position: 'fixed',
+            width: '100%',
+          }}
+        >
           <NavBar />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item
+          position='fixed'
+          m={2}          
+        >
+              <FloatingButton type="list"/>
+          </Grid>
+        <Grid item xs={12}
+          mt = { 9 }
+        >
           <ImgMediaCard
             pokemon={pokemon}
             name={pokeName}
@@ -101,8 +114,8 @@ const Description = () => {
             abilities={pokeAbilities}
             moves={pokeMoves}
             types={pokeTypes}
-            weight={pokemon.weight}
-            height={pokemon.height}
+            /* weight={pokemon.weight}
+            height={pokemon.height} */
           />
         </Grid>
         <Grid container
@@ -117,14 +130,17 @@ const Description = () => {
           }}
         >
           <Grid item>
-              <FloatingButton 
-                  pokemon = {pokemon} 
-                  type = "prev"
-                  disabled = {pokemon.id <= 0}
-              />
+            <FloatingButton 
+              pokemon = {pokemon} 
+              type = "prev"
+              disabled = {pokemon.id <= 0}
+            />
           </Grid>
           <Grid item>
-              <FloatingButton pokemon={pokemon} name={pokeName} type="next"/>
+            <FloatingButton 
+              pokemon={pokemon} 
+              name={pokeName} 
+              type="next"/>
           </Grid>
         </Grid>
       </Grid>

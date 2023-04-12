@@ -1,10 +1,5 @@
-import * as React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardMedia, Grid, Divider, Typography} from '@mui/material';
-/* import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'; */
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from 'react-router-dom';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
@@ -21,7 +16,7 @@ const ImgMediaCard = (props) => {
   useEffect(() => {
     evaluarEvoluciones(props)
   }, [props])
-
+  
   const evaluarEvoluciones = (props) => {
     // Se añade el primer pokemon dado que siempre hay una especie inicial, 
     // la cual puede o no tener una siguiente evolución
@@ -71,7 +66,7 @@ const ImgMediaCard = (props) => {
           }
       }
     }
-  }
+  } 
 
   useEffect(() => {
   }, [listaEvoluciones])
@@ -81,14 +76,6 @@ const ImgMediaCard = (props) => {
       props.name.charAt(0).toUpperCase() + props.name.slice(1)
     )
   }
-
-  const theme = createTheme({
-    palette: {
-      gradient: {
-        main: "linear-gradient(rgb(54, 140, 144) 60%, rgb(46, 119, 142))",
-      }
-    }
-  })
 
   return (
     <Grid container 
@@ -104,72 +91,71 @@ const ImgMediaCard = (props) => {
       >
         <Card
           sx = {{
-            minWidth: '20em',
-            width: '26em',
+            /* minWidth: '20em',
+            heigth: '100vh', */
+            display: 'flex',
             backgroundColor: 'rgb(238, 249, 238)',
-            borderRadius: '1em 1em 0 0',
-            boxShadow: 3
+            borderRadius: '1em',
+            border: '1px solid rgb(39,114,185)',
+            boxShadow: 3,
+            alignItems: 'center',
           }}
         >
           <CardMedia
             component="img"
             alt={props.name}
-            image={props.image}            
+            image={props.image}           
             sx = {{
-              width: '24em',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
               backgroundColor: 'rgb(238, 249, 238)',
-              /* border: '1px solid red', */
-              margin : '1em 1em'
+              height: 'fit-content',
+              margin: '1em 2em',
             }}
           />
-          <ThemeProvider theme={theme}>
-            <CardContent 
-              sx = {{
-                background: (theme) => theme.palette.gradient.main,
-                color: 'rgb(238, 249, 238)',
-                justifyContent: 'center',
-                textAlign: 'center',
-                padding: '2em 4em',
-                borderRadius: '1.5em 1.5em 0 0'
-              }}
-            >
+          <CardContent 
+            sx = {{
+              backgroundColor: 'rgb(255, 255, 255)',
+              borderLeft: '1px solid rgb(39,114,185)',
+              borderRadius: '1em',
+              justifyContent: 'center',
+              textAlign: 'center',
+              padding: '2em 4em',
+              
+            }}
+          >
                         
-              <Typography gutterBottom variant="h4" component="div">
-                <b>{pasarAMayus(props)}</b>
-              </Typography>
+            <Typography gutterBottom variant="h4" component="div">
+              <b>{pasarAMayus(props)}</b>
+            </Typography>
 
-              <Divider variant="body1"><b>POSICIÓN EN LA POKEDEX</b></Divider>
-              <Typography variant="body1">
-                #{props.numPokedex}
-              </Typography><br/>
+            <Divider variant="body1"><b>POSICIÓN EN LA POKEDEX</b></Divider>
+            <Typography variant="body1">
+              #{props.numPokedex}
+            </Typography><br/>
 
-              <Divider variant="body1"><b>ESPERIENCIA BASE</b></Divider>
-              <Typography variant="body1">
+            <Divider variant="body1"><b>ESPERIENCIA BASE</b></Divider>
+            <Typography variant="body1">
                 {props.bexp} xp
-              </Typography><br/> 
+            </Typography><br/> 
 
-              <Divider variant="body1"><b>POKEMÓN TIPO</b></Divider>
-              <Typography variant="body1">
+            <Divider variant="body1"><b>POKEMÓN TIPO</b></Divider>
+            <Typography variant="body1">
                 {props.types.map((type) => type.type.name).join(' - ')}
-              </Typography><br/>
+            </Typography><br/>
 
-              <Divider variant="body1"><b>CADENA EVOLUTIVA</b></Divider>
-              <Typography variant="body1">             
-                <ul
-                  style = {{
+            <Divider variant="body1"><b>CADENA EVOLUTIVA</b></Divider>
+            <Typography variant="body1">       
+            <ul
+                style = {{
                     listStyleType: 'none', 
                     padding: '0.5em',
                     margin: 0,
                     justifyContent: 'space-evenly',
                   }}
-                >
-                  {listaEvoluciones.map((item) => 
-                  <li key = {item}>
-                    <Link to={`/description/${item}/`} 
-                      style = {{
+              >
+                {listaEvoluciones.map((item) => 
+                <li key = {item}>
+                  <Link to={`/description/${item}/`} 
+                    style = {{
                         display: 'flex',
                         flexDirection: 'row',
                         justifyContent: 'center',
@@ -178,95 +164,49 @@ const ImgMediaCard = (props) => {
                         
                         textDecoration: 'none',
 
-                        color: '#EEF9EE',
+                        color: 'rgb(52, 105, 165)',
                           '&:hover': {
-                            color: '#a6aea6',
+                            color: 'rgb(36,73,115)',
                             weight: 'bold'
                           },
-                          '&:visited': {
-                            color: '#747974',
-                            weight: 'bold'
-                          }
-                      }}
-                    >
-                      {item}
-                      <OpenInNewIcon fontSize="small"
-                        sx = {{
-                          color: '#EEF9EE',
-                          '&:hover': {
-                            color: '#a6aea6',
-                            weight: 'bold'
-                          },
-                          '&:visited': {
-                            color: '#747974',
-                            weight: 'bold'
-                          }
-                        }}
-                      />                       
-                    </Link>
-                  </li> )} 
-                </ul>                
-              </Typography><br/> 
-
-              <Divider variant="body1"><b>HABILIDADES</b></Divider>
-              <Typography variant="body1">
-                {props.abilities.map((ability) => ability.ability.name).join(' - ')} 
-              </Typography><br/>
-
-              <Divider variant="body1"><b>MOVIMIENTOS</b></Divider>
-              <Typography variant="body1">
-                {props.moves.slice(0, 5).map((move) => move.move.name).join(', ')} 
-              </Typography><br/> 
-
-{/*               <Accordion 
-                elevation = {0}
-                  sx = {{ 
-                    background:"none", 
-                    boxShadow: 'none',
-                    '&:before': { 
-                      display: 'none',
-                    }
-                  }}
-                >
-                  <AccordionSummary
-                    expandIcon = 
-                      {<ExpandMoreIcon 
-                        sx = {{ 
-                          color:"rgb(238, 249, 238)" 
-                        }} 
-                      />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                  >
-                  <Typography 
-                    align='center'
-                    sx = {{ 
-                      width:"100%",
-                      color:"rgb(238, 249, 238)" 
                     }}
                   >
-                      <b>MOVIMIENTOS</b>
-                  </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography sx = {{ color:"rgb(238, 249, 238)"}}>
-                      {props.moves.map((move) => move.move.name).join(', ')}
-                    </Typography>
-                  </AccordionDetails>
-              </Accordion><br/> */} 
-              
-              <Divider variant="body1"><b>ALTURA</b></Divider>
-              <Typography variant="body1">
-                {props.weight} cm
-              </Typography><br/>
-              
-              <Divider variant="body1"><b>PESO</b></Divider>
-              <Typography variant="body1">
-                {props.height} kg
-              </Typography>
+                    {item}
+                    <OpenInNewIcon fontSize="small"
+                      sx = {{
+                          color: 'rgb(52, 105, 165)',
+                          '&:hover': {
+                            color: 'rgb(36,73,115)',
+                            weight: 'bold'
+                          },
+                      }}
+                    />                       
+                  </Link>
+                </li> )} 
+              </ul>
+            </Typography><br/> 
 
-            </CardContent>
-          </ThemeProvider>
+            <Divider variant="body1"><b>HABILIDADES</b></Divider>
+            <Typography variant="body1">
+              {props.abilities.map((ability) => ability.ability.name).join(' - ')} 
+            </Typography><br/>
+
+            <Divider variant="body1"><b>MOVIMIENTOS</b></Divider>
+            <Typography variant="body1">
+              {props.moves.slice(0, 5).map((move) => move.move.name).join(', ')} 
+            </Typography><br/> 
+              
+            {/* <Divider variant="body1"><b>ALTURA</b></Divider>
+            <Typography variant="body1">
+                {props.weight} cm
+            </Typography><br/>
+              
+            <Divider variant="body1"><b>PESO</b></Divider>
+            <Typography variant="body1">
+                {props.height} kg
+            </Typography> */}
+
+          </CardContent>
         </Card>
       </Grid>
     </Grid>

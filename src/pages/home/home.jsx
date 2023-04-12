@@ -1,33 +1,56 @@
-import React, { useEffect, useState } from "react";
-import "../../App.css";
-import BasicTable from "../../components/BasicTable";
-import NavBar from "../../components/NavBar";
-import { getPokemons } from "../../api/apis";
-import { Grid } from "@mui/material";
+import React, { useEffect, useState } from 'react';
+import charmUrl from '../../assets/charmUrl';
+import logoUrl from '../../assets/logoUrl';
+import { Button, Grid, Typography } from '@mui/material';
+import psiduckUrl from '../../assets/psiduckUrl';
 
 const Home = () => {
-  const [pokemon, setPokemon] = useState([]);
-
-  useEffect(() => {
-    getPokemons()
-      .then((pokemon) => setPokemon(pokemon.data.results));
-  }, []);
-
   return (
-    <>
-      <Grid>
-        <NavBar />
-      </Grid> 
-      <Grid container 
-        spacing = {1} 
-        justifyContent = "center"
-      >
-        <Grid>
-          <BasicTable pokemon={pokemon} />
-        </Grid>
+    <Grid container
+      sx = {{
+        position: 'relative',
+      }}
+    >
+      <Grid item
+        sx = {{
+          position: 'absolute',
+          bottom: 0, 
+          left: 0,       
+        }}>
+        <img
+          src={psiduckUrl}
+          alt='psiduck'
+        />  
       </Grid>
-    </>
-  );
+      <Grid item
+        sx = {{
+          position: 'absolute',
+          bottom: 0, 
+          right: 0,       
+        }}>
+        <img 
+          src={charmUrl} 
+          alt='charmander' 
+        />
+      </Grid>
+      <Grid item
+        xs = {12} 
+        sx = {{
+          height: '100vh',
+          gap: '1em',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <img src={logoUrl} alt='pokeLogo' height='100vh' />
+        <Button variant="outlined" size="small" href={`/list`}>
+          Gotta catch'em all!
+        </Button>
+      </Grid>
+    </Grid>
+  )
 };
 
 export default Home;

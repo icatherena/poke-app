@@ -7,7 +7,7 @@ const Loading = () => {
       container
       xs={12}
       sx={{
-        height: "100vh",
+        height: "80vh",
         display: "flex",
         justifyContent: "center",
       }}
@@ -31,13 +31,13 @@ const Loading = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: "rgb(238, 249, 238)",
+            border: "1px solid rgb(39,114,185)",
             borderRadius: ".5em",
             gap: '1em'
           }}
         >
           <CircularProgress />
-          <Typography>Pokemon's card is loading</Typography>
+          <Typography>Cargando</Typography>
         </Box>
       </Grid>
     </Grid>
