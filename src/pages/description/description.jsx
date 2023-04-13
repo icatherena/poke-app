@@ -36,7 +36,8 @@ const Description = () => {
       .then((res) => {
         setPokemon(res.data);
         setPokeName(res.data.name);
-        setPokeImage(res.data.sprites.other.dream_world.front_default);
+        setPokeImage(res.data.sprites.other['official-artwork'].front_default);
+        console.log(res.data.sprites.other['official-artwork'].front_default);
         setPokeAbilities(res.data.abilities);
         setPokeTypes(res.data.types);
         setPokeMoves(res.data.moves);

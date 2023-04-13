@@ -66,7 +66,7 @@ const BasicTable = ({pokemon}) => {
                     {row.name}
                   </TableCell>
                   <TableCell component="th" scope="row" align="center">
-                    <Link to={`/description/${spliceUrl(row.url)}/`} >
+                    <Link to={`/description/${row.name}/`} >
                       <OpenInNewIcon fontSize="small"
                         sx = {{
                           color: 'rgb(52, 105, 165)',
