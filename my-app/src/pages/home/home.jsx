@@ -1,51 +1,56 @@
-import { Grid } from "@mui/material";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { baseUrl } from "../../api/baseUrl";
-import BasicTable from "../../components/BasicTable";
-import NavBar from "../../components/NavBar";
-import '../../App.css'
+import React, { useEffect, useState } from 'react';
+import charmUrl from '../../assets/charmUrl';
+import logoUrl from '../../assets/logoUrl';
+import { Button, Grid, Typography } from '@mui/material';
+import psiduckUrl from '../../assets/psiduckUrl';
 
 const Home = () => {
-  
-  const [pokemon, setPokemon] = useState([]);
-  
-  useEffect(() => {
-     
-      axios.get(baseUrl)
-          .then((res) => {
-              return res.data.results
-          })
-          .then((results) => {
-              return Promise.all(
-                  results.map((res) =>
-                  axios.get(res.url))
-              )
-          })
-          .then((results) => {
-              setPokemon(results.map((res) =>res.data)
-              )
-          })
-  }, []);
-
-  console.log('pokemon', pokemon);
-    
   return (
-    <div>
-      <div className='nav-container' sx={12}>
-        <NavBar/>
-      </div>
-      <div className='table-container'>
-          <Grid container spacing={1} justifyContent='center'>
-            <Grid item xs={10} sm={8} md={6}>
-              <BasicTable pokemon={pokemon} />
-            </Grid>
-          </Grid>
-      </div>  
-    </div>
-        
-
-  );
+    <Grid container
+      sx = {{
+        position: 'relative',
+      }}
+    >
+      <Grid item
+        sx = {{
+          position: 'absolute',
+          bottom: 0, 
+          left: 0,       
+        }}>
+        <img
+          src={psiduckUrl}
+          alt='psiduck'
+        />  
+      </Grid>
+      <Grid item
+        sx = {{
+          position: 'absolute',
+          bottom: 0, 
+          right: 0,       
+        }}>
+        <img 
+          src={charmUrl} 
+          alt='charmander' 
+        />
+      </Grid>
+      <Grid item
+        xs = {12} 
+        sx = {{
+          height: '100vh',
+          gap: '1em',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <img src={logoUrl} alt='pokeLogo' height='100vh' />
+        <Button variant="outlined" size="small" href={`/list`}>
+          Gotta catch'em all!
+        </Button>
+      </Grid>
+    </Grid>
+  )
 };
 
 export default Home;
