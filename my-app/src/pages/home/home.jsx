@@ -9,6 +9,7 @@ const Home = () => {
     <Grid container
       sx = {{
         position: 'relative',
+        /* backgroundColor: "rgb(238, 249, 238)", */
       }}
     >
       <Grid item

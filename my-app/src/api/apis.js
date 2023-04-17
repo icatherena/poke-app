@@ -4,7 +4,7 @@ const getPokemons = () => BASEURL.get("/pokemon/?limit=1278")
 
 const getPokemonById = (id) => BASEURL.get(`/pokemon/${id}`)
 
-const getIdChainById = (id) => BASEURL.get(`/pokemon-species/${id}`)
+const getChainIdById = (speciesId) => BASEURL.get(`/pokemon-species/${speciesId}`)
 
 const getEvolutionChainById = (chainId) => BASEURL.get(`/evolution-chain/${chainId}`)
 
@@ -12,6 +12,6 @@ const getEvolutionChainById = (chainId) => BASEURL.get(`/evolution-chain/${chain
 export {
     getPokemons,
     getPokemonById,
-    getIdChainById,
+    getChainIdById,
     getEvolutionChainById
 }

@@ -44,6 +44,9 @@ const List = () => {
                 justifyContent = "left"
                 mx = { 4 }
                 mt = { 8 }
+                /* sx = {{
+                    backgroundColor: "rgb(238, 249, 238)",
+                }} */
             >
                 <Grid item>
                     <BasicTable pokemon = { pokemon } />
