@@ -6,6 +6,7 @@ import {
   Grid,
   Divider,
   Typography,
+  createTheme,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
@@ -29,8 +30,8 @@ const ImgMediaCard = (props) => {
     // se setea su valor unicamente cuando es distinto de nulo o indefinido
     if (props.initialForm && props.initialForm.length > 0) {
       if (props.initialForm !== null || props.initialForm !== undefined) {
+        setListaEvoluciones([props.initialForm]);
       }
-      setListaEvoluciones([props.initialForm]);
       // En un inicio, mensaje al no estar definido setea la cadena que se le asignaría en el ese
       // Para salvar esa situación, se setea el valor de mensaje en null
       setMensaje(null);
@@ -92,41 +93,48 @@ const ImgMediaCard = (props) => {
     return props.name.charAt(0).toUpperCase() + props.name.slice(1);
   };
 
-  /* const theme = useTheme(); */
+  const theme = createTheme({});
 
   return (
     <Grid
       container
       sx={{
         padding: "2em",
+        /* backgroundColor: "rgb(238, 249, 238)" */
       }}
     >
       <Grid
         item
         xs={12}
         sx={{
+          /* backgroundColor: "rgba(255, 0, 255)", */
           display: "flex",
           justifyContent: "center",
         }}
       >
         <Grid
-          sx = {{
-              /* [theme.breakpoints.down('md')]: {
-                display: 'flex',
-                flexDirection: 'column',
-              }, */
+          item
+          xs={9}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
           }}
         > 
           <Card
             sx={{
-              /* heigth: '100vh', */
-              display: "flex",
               backgroundColor: "rgb(238, 249, 238)",
-              borderRadius: "1em",
               border: "1px solid rgb(39,114,185)",
+              borderRadius: "1em",
               boxShadow: 3,
+              display: "flex",
               alignItems: "center",
-              overflow: "hidden"
+              /* gap: "1em", */
+              
+                [theme.breakpoints.down("md")]: {
+                  width: "70%",
+                  flexDirection: "column",
+                }
+              
             }}
           >
             <CardMedia
@@ -134,10 +142,12 @@ const ImgMediaCard = (props) => {
               alt={props.name}
               image={props.image}
               sx={{
-                backgroundColor: "rgb(238, 249, 238)",
+                /* backgroundColor: "rgb(238, 249, 238)", */
                 height: "fit-content",
                 margin: "1em 2em",
-                maxWidth: "50%",
+                minWidth: "40%",
+                overflow: "hidden",
+                /* border: "1px solid rgb(39,114,185)", */
               }}
             />
             <CardContent
@@ -145,10 +155,13 @@ const ImgMediaCard = (props) => {
                 backgroundColor: "rgb(255, 255, 255)",
                 borderLeft: "1px solid rgb(39,114,185)",
                 borderRadius: "1em",
-                justifyContent: "center",
+                minWidth: "40%",
+                padding: "2em 3em",
                 textAlign: "center",
-        
-                padding: "2em 4em",
+                [theme.breakpoints.down("md")]: {
+                  borderLeft: "none",
+                  borderTop: "1px solid rgb(39,114,185)",
+                }
               }}
             >
               <Typography gutterBottom variant="h4" component="div">
@@ -184,10 +197,10 @@ const ImgMediaCard = (props) => {
                     <Typography>{mensaje}</Typography>
                   </Grid>
                 ) : (
-                  listaEvoluciones.map((item) => (
-                    <Grid item xs={12}>
+                  listaEvoluciones.map((item, index) => (
+                    <Grid item xs={12} key={index}>
                       <Link
-                        to={`/description/${item}/`}
+                        to={`/description/${item}/`} 
                         style={{
                           display: "flex",
                           flexDirection: "row",

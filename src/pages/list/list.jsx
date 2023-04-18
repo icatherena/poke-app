@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import BasicTable from "../../components/BasicTable";
 import NavBar from "../../components/NavBar";
 import { getPokemons } from "../../api/apis";
-import { Grid } from "@mui/material";
+import { Grid, createTheme } from "@mui/material";
 import bulbasaurUrl from "../../assets/bulbasaurUrl";
 
 const List = () => {
     const [pokemon, setPokemon] = useState([]);
+    const theme = createTheme({}); 
 
     useEffect(() => {
       getPokemons()
@@ -30,7 +31,13 @@ const List = () => {
                     sx = {{
                         position: 'fixed',
                         top: '5em', 
-                        right: '2em',       
+                        right: '2em',
+                        [theme.breakpoints.down("lg")]: {
+                            display: 'none',
+                        },      
+                        /* [theme.breakpoints.between("md", "lg")]: {
+                            width: '50%',
+                        }, */
                     }}
                 >
                     <img
@@ -44,6 +51,9 @@ const List = () => {
                 justifyContent = "left"
                 mx = { 4 }
                 mt = { 8 }
+                /* sx = {{
+                    backgroundColor: "rgb(238, 249, 238)",
+                }} */
             >
                 <Grid item>
                     <BasicTable pokemon = { pokemon } />

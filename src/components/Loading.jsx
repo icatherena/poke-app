@@ -5,7 +5,6 @@ const Loading = () => {
   return (
     <Grid
       container
-      xs={12}
       sx={{
         height: "80vh",
         display: "flex",
@@ -13,7 +12,8 @@ const Loading = () => {
       }}
     >
       <Grid
-        item
+        item 
+        xs={12}
         sx={{
           display: "flex",
           justifyContent: "center",

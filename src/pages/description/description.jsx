@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import FloatingButton from "../../components/FloatingButton";
 import {
   getPokemonById,
-  getIdChainById,
+  getChainIdById,
   getEvolutionChainById,
 } from "../../api/apis";
 import { Grid } from "@mui/material";
@@ -23,6 +23,8 @@ const Description = () => {
   const [pokeAbilities, setPokeAbilities] = useState([]);
   const [pokeTypes, setPokeTypes] = useState([]);
   const [pokeMoves, setPokeMoves] = useState([]);
+
+  const [PokeSpeciesUrl, setPokeSpeciesUrl] = useState();
 
   const [evolutionChainUrl, setEvolutionChainUrl] = useState([]);
   const [initialForm, setInitialForm] = useState();
@@ -42,10 +44,17 @@ const Description = () => {
         setPokeTypes(res.data.types);
         setPokeMoves(res.data.moves);
 
-        getIdChainById(id)
+        setPokeSpeciesUrl(res.data.species.url); 
+        console.log(res.data.species.url);
+        let speciesId = res.data.species.url.split("/")[6];
+        console.log(speciesId)
+
+        getChainIdById(parseInt(speciesId))
           .then((res) => {
             setEvolutionChainUrl(res.data.evolution_chain.url);
+            console.log(res.data.evolution_chain.url);
             let chainId = res.data.evolution_chain.url.split("/")[6];
+            console.log(chainId);
 
             getEvolutionChainById(parseInt(chainId))
               .then((res) => {
@@ -62,7 +71,12 @@ const Description = () => {
                 );
                 /* console.log(res.data.chain.evolves_to?.map((item) => item.evolves_to?.map((item) => item.species.name))) */
               });
-          });
+          })
+
+          /* .catch((error) => {
+            console.error(null);
+            setEvolutionChainUrl(null);
+          }) */
       })
 
       .catch((error) => {

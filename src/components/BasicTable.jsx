@@ -16,9 +16,9 @@ const BasicTable = ({pokemon}) => {
     },
     [pokemon]) 
 
-  function spliceUrl (url) {
+  /* function spliceUrl (url) {
     return parseInt(url.split("/")[6])
-  }
+  } */
   
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -66,7 +66,7 @@ const BasicTable = ({pokemon}) => {
                     {row.name}
                   </TableCell>
                   <TableCell component="th" scope="row" align="center">
-                    <Link to={`/description/${row.name}/`} >
+                    <Link to={`/description/${/* spliceUrl(row.url) */row.name}/`} >
                       <OpenInNewIcon fontSize="small"
                         sx = {{
                           color: 'rgb(52, 105, 165)',
