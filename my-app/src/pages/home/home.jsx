@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import charmUrl from '../../assets/charmUrl';
 import logoUrl from '../../assets/logoUrl';
-import { Button, Grid, Typography } from '@mui/material';
+import { Button, Grid, createTheme } from '@mui/material';
 import psiduckUrl from '../../assets/psiduckUrl';
 
 const Home = () => {
+  const theme = createTheme({
+    /* imageHome: {
+      [theme.breakpoints.down('md')]: {
+        display: 'none',
+      }
+    } */
+  });
+
   return (
     <Grid container
       sx = {{
@@ -13,10 +21,17 @@ const Home = () => {
       }}
     >
       <Grid item
+        /* class = {imageHome} */
         sx = {{
           position: 'absolute',
           bottom: 0, 
-          left: 0,       
+          left: 0,    
+          /* [theme.breakpoints.down('md')]: {
+            display: 'none',
+          }   */ 
+          [theme.breakpoints.down("md")]: {
+            display: 'none',
+          },
         }}>
         <img
           src={psiduckUrl}
@@ -27,7 +42,10 @@ const Home = () => {
         sx = {{
           position: 'absolute',
           bottom: 0, 
-          right: 0,       
+          right: 0,  
+          [theme.breakpoints.down("md")]: {
+            display: 'none',
+          },     
         }}>
         <img 
           src={charmUrl} 
@@ -46,7 +64,7 @@ const Home = () => {
         }}
       >
         <img src={logoUrl} alt='pokeLogo' height='100vh' />
-        <Button variant="outlined" size="small" href={`/list`}>
+        <Button variant="outlined" size="small" href={`/lista`}>
           Gotta catch'em all!
         </Button>
       </Grid>

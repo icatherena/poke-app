@@ -6,6 +6,7 @@ import {
   Grid,
   Divider,
   Typography,
+  createTheme,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
@@ -92,7 +93,7 @@ const ImgMediaCard = (props) => {
     return props.name.charAt(0).toUpperCase() + props.name.slice(1);
   };
 
-  /* const theme = useTheme(); */
+  const theme = createTheme({});
 
   return (
     <Grid
@@ -114,11 +115,9 @@ const ImgMediaCard = (props) => {
         <Grid
           item
           xs={9}
-          sx = {{
-              /* [theme.breakpoints.down('md')]: {
-                display: 'flex',
-                flexDirection: 'column',
-              }, */
+          sx={{
+            display: "flex",
+            justifyContent: "center",
           }}
         > 
           <Card
@@ -130,6 +129,12 @@ const ImgMediaCard = (props) => {
               display: "flex",
               alignItems: "center",
               /* gap: "1em", */
+              
+                [theme.breakpoints.down("md")]: {
+                  width: "70%",
+                  flexDirection: "column",
+                }
+              
             }}
           >
             <CardMedia
@@ -153,6 +158,10 @@ const ImgMediaCard = (props) => {
                 minWidth: "40%",
                 padding: "2em 3em",
                 textAlign: "center",
+                [theme.breakpoints.down("md")]: {
+                  borderLeft: "none",
+                  borderTop: "1px solid rgb(39,114,185)",
+                }
               }}
             >
               <Typography gutterBottom variant="h4" component="div">
@@ -188,10 +197,10 @@ const ImgMediaCard = (props) => {
                     <Typography>{mensaje}</Typography>
                   </Grid>
                 ) : (
-                  listaEvoluciones.map((item) => (
-                    <Grid item xs={12}>
+                  listaEvoluciones.map((item, index) => (
+                    <Grid item xs={12} key={index}>
                       <Link
-                        to={`/description/${item}/`} 
+                        to={`/descripcion/${item}/`} 
                         style={{
                           display: "flex",
                           flexDirection: "row",

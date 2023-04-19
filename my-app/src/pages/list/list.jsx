@@ -2,16 +2,27 @@ import React, { useState, useEffect } from "react";
 import BasicTable from "../../components/BasicTable";
 import NavBar from "../../components/NavBar";
 import { getPokemons } from "../../api/apis";
-import { Grid } from "@mui/material";
+import { Grid, createTheme } from "@mui/material";
 import bulbasaurUrl from "../../assets/bulbasaurUrl";
+import { useLocation } from "react-router-dom";
 
 const List = () => {
     const [pokemon, setPokemon] = useState([]);
+    const [count, setCount] = useState(0);
+
+    const theme = createTheme({}); 
+
+    const location = useLocation();
+    const query = new URLSearchParams(location.search);
+    const page = parseInt(query.get('pagina') || '1', 10);
 
     useEffect(() => {
-      getPokemons()
-        .then((pokemon) => setPokemon(pokemon.data.results));
-    }, []);
+      getPokemons(page)
+        .then((pokemon) => {
+            setPokemon(pokemon.data.results);
+            setCount(pokemon.data.count);
+        });
+    }, [page]);
   
     return (
         <>
@@ -30,7 +41,13 @@ const List = () => {
                     sx = {{
                         position: 'fixed',
                         top: '5em', 
-                        right: '2em',       
+                        right: '2em',
+                        [theme.breakpoints.down("lg")]: {
+                            display: 'none',
+                        },      
+                        /* [theme.breakpoints.between("md", "lg")]: {
+                            width: '50%',
+                        }, */
                     }}
                 >
                     <img
@@ -49,7 +66,11 @@ const List = () => {
                 }} */
             >
                 <Grid item>
-                    <BasicTable pokemon = { pokemon } />
+                    <BasicTable 
+                        pokemon = { pokemon } 
+                        page = { page } 
+                        count = { count } 
+                    />
                 </Grid>
             </Grid>
         </>    
