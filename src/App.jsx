@@ -11,8 +11,8 @@ function App() {
     <ThemeProvider>
       <Routes>
         <Route path='/' element={<Home />} exact />
-        <Route path='/list' element={<List />} exact />
-        <Route path='/description/:id' element={<Description />} exact />
+        <Route path='/lista' element={<List />} exact />
+        <Route path='/descripcion/:id' element={<Description />} exact />
         <Route path='*' element={<Home />} exact />
       </Routes>
     </ThemeProvider>

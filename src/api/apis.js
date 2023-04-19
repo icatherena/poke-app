@@ -1,6 +1,6 @@
 import BASEURL from "./baseUrl"
 
-const getPokemons = () => BASEURL.get("/pokemon/?limit=1278")
+const getPokemons = (page) => BASEURL.get(`/pokemon/?offset=${(page-1)*20}&limit=${20}`)
 
 const getPokemonById = (id) => BASEURL.get(`/pokemon/${id}`)
 

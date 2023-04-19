@@ -200,7 +200,7 @@ const ImgMediaCard = (props) => {
                   listaEvoluciones.map((item, index) => (
                     <Grid item xs={12} key={index}>
                       <Link
-                        to={`/description/${item}/`} 
+                        to={`/descripcion/${item}/`} 
                         style={{
                           display: "flex",
                           flexDirection: "row",
