@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import {
+  Link,
+  MemoryRouter,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import {
   Grid,
   Paper,
@@ -14,7 +20,7 @@ import {
 } from "@mui/material";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
-const BasicTable = ({ pokemon }, props) => {
+const BasicTable = ({ pokemon, page, count }) => {
   const [listPokemon, setListPokemon] = useState(pokemon);
 
   useEffect(() => {
@@ -78,7 +84,7 @@ const BasicTable = ({ pokemon }, props) => {
               ))}
             </TableBody>
           </Table>
-          <Pagination
+          {/* <Pagination
             sx={{
               padding: ".7em",
               borderTop: "1px solid rgb(225, 225, 225)",
@@ -95,6 +101,24 @@ const BasicTable = ({ pokemon }, props) => {
                 {...item}
               />
             )}
+          /> */}
+          <Pagination
+            sx={{
+              padding: ".7em",
+              borderTop: "1px solid rgb(225, 225, 225)",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-end",
+            }}
+            page={page}
+            count={count}
+            renderItem={(item) => (
+              <PaginationItem
+                component={Link}
+                to={`/lista${item.page === 1 ? "" : `?pagina=${item.page}`}`}
+                {...item}
+              />
+            )}
           />
         </TableContainer>
       </Grid>
@@ -103,3 +127,13 @@ const BasicTable = ({ pokemon }, props) => {
 };
 
 export default BasicTable;
+
+/* function PaginationLink() {
+  return (
+    <MemoryRouter initialEntries={[]} initialIndex={0}>
+      <Routes>
+        <Route path="*" element={<BasicTable />} />
+      </Routes>
+    </MemoryRouter>
+  );
+} */
