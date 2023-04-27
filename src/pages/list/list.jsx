@@ -22,6 +22,7 @@ const List = () => {
       setCount((pokemon.data.count % 20) + parseInt(pokemon.data.count / 20));
     });
   }, [page]);
+  console.log(count)
 
   return (
     <>
