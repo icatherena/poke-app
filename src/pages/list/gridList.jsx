@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import GridList from "../../components/GridList";
 import NavBar from "../../components/NavBar";
-import { getPokemonById, getPokemons } from "../../api/apis";
+import { getPokemonById, getPokemones } from "../../api/apis";
 import { Grid } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import Loading from "../../components/Loading";
@@ -20,36 +20,61 @@ const Grilla = () => {
   const page = parseInt(query.get("pagina") || "1", 10);
 
   useEffect(() => {
-    /* setIsLoading(true); */
+    getPokemones(page).then((res) => {
+      setPokemonList(res.data.results.map((pokemon) => pokemon.name));
+      console.log(res.data.count)
+      setCount(/* (res.data.count % 12) +  */ 1 + parseInt(res.data.count / 12));
+    });
+  }, [page]);
 
-    getPokemons(page)
-      .then((res) => {
-        setPokemonList(res.data.results.map((pokemon) => pokemon.name));
-        setCount((res.data.count % 18) + parseInt(res.data.count / 18));
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   for (let pokemon of pokemonList) {
+  //     getPokemonById(pokemon)
+  //       .then((res) => {
+  //         setImage((prevImage) => ({
+  //           ...prevImage,
+  //           [pokemon]:
+  //             res.data.sprites.other["official-artwork"].front_default,
+  //         }));
+  //         setTypes((prevType) => ({
+  //           ...prevType,
+  //           [pokemon]: res.data.types.map(
+  //             (type) => type.type.name
+  //           ) /* .join(', ') */,
+  //         }));
+  //       })
+  //       .catch((error) => console.log(error))
+  //       .finally(() => setIsLoading(false))
+  //   }
+  // }, [pokemonList]);
 
-        for (let pokemon of pokemonList) {
-          getPokemonById(pokemon)
-            .then((res) => {
-              setImage((prevImage) => ({
-                ...prevImage,
-                [pokemon]:
-                  res.data.sprites.other["official-artwork"].front_default,
-              }));
-              setTypes((prevType) => ({
-                ...prevType,
-                [pokemon]: res.data.types.map(
-                  (type) => type.type.name
-                ) /* .join(', ') */,
-              }));
-            })
-            .catch((error) => console.log(error));
-        }
+  useEffect(() => {
+    setIsLoading(true);
+    Promise.all(
+      pokemonList.map((pokemon) =>
+        getPokemonById(pokemon).then((res) => ({
+          name: pokemon,
+          image: res.data.sprites.other["official-artwork"].front_default,
+          types: res.data.types.map((type) => type.type.name),
+        }))
+      )
+    )
+      .then((results) => {
+        const newImage = {};
+        const newTypes = {};
+        results.forEach((result) => {
+          newImage[result.name] = result.image;
+          newTypes[result.name] = result.types;
+        });
+        setImage(newImage);
+        setTypes(newTypes);
       })
-      .finally(() => setIsLoading(false));
+      .catch((error) => console.log(error))
+      .finally(() => setIsLoading(false))
+  }, [pokemonList]);
 
-  }, [page, pokemonList]);
-
-  return (isLoading ? (
+  return isLoading ? (
     <Grid container>
       <Grid item xs={12}>
         <NavBar />
@@ -90,7 +115,7 @@ const Grilla = () => {
         </Grid>
       </Grid>
     </>
-  ));
+  );
 };
 
 export default Grilla;

@@ -1,6 +1,14 @@
 import * as React from "react";
 import { createTheme } from "@mui/material";
-import { CardMedia, CardContent, Card, Grid, Typography, Pagination, PaginationItem } from "@mui/material";
+import {
+  CardMedia,
+  CardContent,
+  Card,
+  Grid,
+  Typography,
+  Pagination,
+  PaginationItem,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 
 const GridList = ({ pokemonList, image, types, page, count }) => {
@@ -25,6 +33,9 @@ const GridList = ({ pokemonList, image, types, page, count }) => {
               border: ".5px solid rgb(39, 114, 185)",
               borderRadius: "1em",
               /* m: "1em" */
+              "&:hover": {
+                boxShadow: 5,
+              },
             }}
           >
             <CardMedia
@@ -43,15 +54,29 @@ const GridList = ({ pokemonList, image, types, page, count }) => {
                 py: 0,
               }}
             >
-              <Typography
-                gutterBottom
-                variant="h6"
-                component="div"
-                justifyContent="flex-start"
-                px={1}
+              <Link
+                to={`/descripcion/${pokemon}/`}
+                style={{
+                  textDecoration: "none",
+                  color: "rgb(52, 105, 165)",
+                  "&:hover": {
+                    /* textDecoration: "underline", */
+                    cursor: "pointer",
+                    color: "rgb(36, 73, 115)", /* No funciona al hacer hover */
+                    fontWeight: "700", /* bold */
+                  },
+                }}
               >
-                {pasarAMayus(pokemon)}
-              </Typography>
+                <Typography
+                  gutterBottom
+                  variant="h6"
+                  component="div"
+                  justifyContent="flex-start"
+                  px={1}
+                >
+                  {pasarAMayus(pokemon)}
+                </Typography>
+              </Link>
               <Grid
                 sx={{
                   display: "flex",
